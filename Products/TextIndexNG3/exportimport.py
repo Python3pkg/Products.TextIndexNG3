@@ -33,7 +33,7 @@ class TextIndexNG3NodeAdapter(NodeAdapterBase):
         node = self._getObjectNode('index')
 
         settings = self.context.index.getSettings()
-        items = settings.items()
+        items = list(settings.items())
         items.sort()
         for key, value in items:
             if key == 'splitter_max_length':
@@ -41,11 +41,11 @@ class TextIndexNG3NodeAdapter(NodeAdapterBase):
             if isinstance(value, (tuple, list)):
                 for item in value:
                     child = self._doc.createElement(key[:-1])
-                    child.setAttribute('value', unicode(item))
+                    child.setAttribute('value', str(item))
                     node.appendChild(child)
             else:
                 child = self._doc.createElement(key)
-                child.setAttribute('value', unicode(value))
+                child.setAttribute('value', str(value))
                 node.appendChild(child)
 
         return node
@@ -60,7 +60,7 @@ class TextIndexNG3NodeAdapter(NodeAdapterBase):
 
         settings = self.context.index.getSettings()
         new_settings = {}
-        for key, value in settings.items():
+        for key, value in list(settings.items()):
             if key == 'splitter_max_length':
                 continue
             if isinstance(value, (tuple, list)):
@@ -75,7 +75,7 @@ class TextIndexNG3NodeAdapter(NodeAdapterBase):
                 new_value = None
             elif isinstance(value, bool):
                 new_value = self._convertToBoolean(new_value[0])
-            elif isinstance(value, basestring) or value is None:
+            elif isinstance(value, str) or value is None:
                 new_value = new_value[0]
             elif isinstance(value, int):
                 new_value = int(new_value[0])

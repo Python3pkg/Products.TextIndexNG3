@@ -17,7 +17,7 @@ from zope.component import adapts
 
 from Products.ATContentTypes.interface.file import IATFile
 
-from cmf_adapters import CMFContentAdapter
+from .cmf_adapters import CMFContentAdapter
 
 
 class ATFileAdapter(CMFContentAdapter):

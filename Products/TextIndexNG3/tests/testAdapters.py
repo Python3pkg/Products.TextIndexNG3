@@ -18,7 +18,7 @@ import unittest
 import pkg_resources
 import os
 import sys
-import txngtest
+from . import txngtest
 from Testing import ZopeTestCase
 
 ZopeTestCase.installProduct('ZCatalog', 1)
@@ -67,7 +67,7 @@ def test_suite():
     if _PLONE_INDEXER_INSTALLED:
         s.addTest(unittest.makeSuite(PloneIndexerAdapterTests))
     else:
-        print 'Products.TextIndexNG3: Skipped Plone Indexer adapter tests.'
+        print('Products.TextIndexNG3: Skipped Plone Indexer adapter tests.')
     return s
 
 def main():

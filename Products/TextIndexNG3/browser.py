@@ -20,8 +20,8 @@ class IndexView(BrowserView):
         """ perform a query and return the search result as list of
             object paths
         """
-        if not isinstance(query, unicode):
-            pattern = unicode(pattern, encoding)
+        if not isinstance(query, str):
+            pattern = str(pattern, encoding)
         rs = self.context.index.search(query, parser=parser)
         return [self.context.getpath(docid) for docid in rs.getDocids()]
 
@@ -29,8 +29,8 @@ class IndexView(BrowserView):
         """ return all words from the lexicon that match a particualar
             pattern for a given language.
         """
-        if not isinstance(pattern, unicode):
-            pattern = unicode(pattern, 'utf-8') # ZMI encoding
+        if not isinstance(pattern, str):
+            pattern = str(pattern, 'utf-8') # ZMI encoding
         words = self.context.index.getLexicon().getWordsForPattern(pattern, language)
         words.sort()
         return words
@@ -97,8 +97,8 @@ class IndexView(BrowserView):
         """ return all document paths for a given word """
         word = self.request['word']
         language = self.request.get('language', self.context.index.languages[0])
-        if not isinstance(word, unicode):
-            word = unicode(word, 'utf-8') # ZMI encoding
+        if not isinstance(word, str):
+            word = str(word, 'utf-8') # ZMI encoding
         wid = self.context.index.getLexicon().getWordId(word,language)
         docids = self.context.index.getStorage(self.context.index.fields[0]).getDocumentsForWordId(wid)
         return [self.context.getpath(docid) for docid in docids]

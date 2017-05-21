@@ -14,7 +14,7 @@ $Id: testExportImport.py 2324 2011-05-31 12:03:55Z yvoschu $
 
 import unittest
 import sys
-import txngtest
+from . import txngtest
 
 try:
     from Products.GenericSetup.testing import NodeAdapterTestCase
@@ -71,7 +71,7 @@ def test_suite():
     if _GS_INSTALLED:
         s.addTest(unittest.makeSuite(TextIndexNG3NodeAdapterTests))
     else:
-        print 'Products.TextIndexNG3: Skipped GenericSetup export/import tests.'
+        print('Products.TextIndexNG3: Skipped GenericSetup export/import tests.')
     return s
 
 def main():

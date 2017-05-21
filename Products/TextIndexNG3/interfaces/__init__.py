@@ -6,4 +6,4 @@
 # LICENSE.txt for the terms of this license.
 ###########################################################################
 
-from textindexng import ITextIndexNG3
+from .textindexng import ITextIndexNG3

@@ -141,8 +141,8 @@ class TextIndexNG3(SimpleItem, PropertyManager):
 
         # prepare query (must be unicode string)
         query = record.keys[0]
-        if not isinstance(query, unicode):
-            query = unicode(query, record.get('encoding', self.index.default_encoding), 'ignore')
+        if not isinstance(query, str):
+            query = str(query, record.get('encoding', self.index.default_encoding), 'ignore')
         if not query:
             return None
 

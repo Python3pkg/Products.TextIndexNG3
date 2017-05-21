@@ -6,7 +6,7 @@
 # LICENSE.txt for the terms of this license.
 ###########################################################################
 
-from StringIO import StringIO
+from io import StringIO
 
 import transaction
 from Products.CMFCore.utils import getToolByName
@@ -65,14 +65,14 @@ def install(self):
     configTool = getToolByName(self, 'portal_controlpanel', None)
     if configTool:
         for conf in configlets:
-            print >>out, 'Adding configlet %s\n' % conf['id']
+            print('Adding configlet %s\n' % conf['id'], file=out)
             try: # Plone 4.x
                 configTool.registerConfiglet(**conf)
             except TypeError: # Plone 5
                 del conf['imageUrl']
                 configTool.registerConfiglet(**conf)
 
-    print >> out, "Successfully installed"  
+    print("Successfully installed", file=out)  
     return out.getvalue()
 
 
@@ -82,7 +82,7 @@ def uninstall(self, reinstall=False):
     configTool = getToolByName(self, 'portal_controlpanel', None)
     if configTool:
         for conf in configlets:
-            print >>out, 'Removing configlet %s\n' % conf['id']
+            print('Removing configlet %s\n' % conf['id'], file=out)
             configTool.unregisterConfiglet(conf['id'])
 
     skins_tool = getToolByName(self, 'portal_skins')

@@ -23,6 +23,7 @@ from zopyx.txng3.core.interfaces import IIndexableContent
 from zopyx.txng3.core.content import IndexContentCollector as ICC
 from zopyx.txng3.core.logger import LOG
 from zopyx.txng3.core.config import DEFAULT_LANGUAGE
+import collections
 
 
 class CMFContentAdapter:
@@ -37,7 +38,7 @@ class CMFContentAdapter:
         self.context = context
         self.encoding = 'utf-8'
         try:
-            if callable(context.Language):
+            if isinstance(context.Language, collections.Callable):
                 self.language = context.Language()
             else:
                 self.language = context.Language # plone.app.multilingual
@@ -45,10 +46,10 @@ class CMFContentAdapter:
             self.language = DEFAULT_LANGUAGE
 
     def _c(self, text):
-        if isinstance(text, unicode):
+        if isinstance(text, str):
             return text
         try:
-            return unicode(text, self.encoding)
+            return str(text, self.encoding)
         except UnicodeDecodeError:
             LOG.warn('Content from %s could not be converted to unicode using the site encoding %s' %
                     (self.context.absolute_url(1), self.encoding))

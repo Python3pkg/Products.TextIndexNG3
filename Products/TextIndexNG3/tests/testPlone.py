@@ -54,5 +54,5 @@ def test_suite():
     if _PLONE_INSTALLED:
         s.addTest(unittest.makeSuite(PloneTests))
     else:
-        print 'Products.TextIndexNG3: Skipped Plone setup tests.'
+        print('Products.TextIndexNG3: Skipped Plone setup tests.')
     return s

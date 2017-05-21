@@ -13,7 +13,7 @@ $Id: testTextIndexNG3.py 2347 2011-06-01 10:06:42Z yvoschu $
 """
 
 import sys, os, unittest
-import txngtest
+from . import txngtest
 from Testing import ZopeTestCase
 ZopeTestCase.installProduct('ZCatalog', 1)
 ZopeTestCase.installProduct('TextIndexNG3', 1)
@@ -85,20 +85,20 @@ class TextIndexNG3Tests(ZopeTestCase.ZopeTestCase):
         self.assertEqual(idx._apply_index(request), None)
 
         request = {'foo': 'Foo'}
-        self.assertEqual(idx._apply_index(request)[0][0], u'Foo')
+        self.assertEqual(idx._apply_index(request)[0][0], 'Foo')
         self.assertEqual(idx._apply_index(request)[0][1], {})
 
         request = {'foo': {'query': 'Foo'}}
-        self.assertEqual(idx._apply_index(request)[0][0], u'Foo')
+        self.assertEqual(idx._apply_index(request)[0][0], 'Foo')
         self.assertEqual(idx._apply_index(request)[0][1], {})
 
         request = {'foo': {'query': 'Foo', 'parser': 'foo_parser'}}
-        self.assertEqual(idx._apply_index(request)[0][0], u'Foo')
+        self.assertEqual(idx._apply_index(request)[0][0], 'Foo')
         self.assertEqual(idx._apply_index(request)[0][1],
                          {'parser': 'foo_parser'})
 
         request = {'foo': {'query': 'Foo', 'ranking': False}}
-        self.assertEqual(idx._apply_index(request)[0][0], u'Foo')
+        self.assertEqual(idx._apply_index(request)[0][0], 'Foo')
         self.assertEqual(idx._apply_index(request)[0][1],
                          {'ranking': False})
 

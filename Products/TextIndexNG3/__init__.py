@@ -22,7 +22,7 @@ if not src_dir in sys.path:
     sys.path.append(src_dir)
 
 
-import TextIndexNG3
+from . import TextIndexNG3
 
 def initialize(context):
     context.registerClass(
